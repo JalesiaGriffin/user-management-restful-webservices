@@ -39,4 +39,13 @@ public class UserController {
         List<User> allUsers = userService.getAllUsers();
         return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
+
+    // updateUser REST API
+    // http://localhost:8080/api/users/{id}
+    @PutMapping("{id}")
+    public ResponseEntity<User> updateUser(@PathVariable("id") long userId, @RequestBody User user){
+        user.setId(userId);
+        User updatedUser = userService.updateUser(user);
+        return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+    }
 }
