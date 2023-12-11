@@ -1,6 +1,7 @@
 package com.springboot.usermanagement.service.impl;
 
 import com.springboot.usermanagement.dto.UserDto;
+import com.springboot.usermanagement.exception.EmailAlreadyExistsException;
 import com.springboot.usermanagement.exception.ResourceNotFoundException;
 import com.springboot.usermanagement.model.User;
 import com.springboot.usermanagement.repository.UserRepository;
@@ -23,6 +24,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto userDto) {
         // convert UserDto into User JPA Entity
+        Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
+
+        if(optionalUser.isPresent()){
+            throw new EmailAlreadyExistsException("Email Already Exists for User");
+        }
+
         User user = modelMapper.map(userDto, User.class);
 
         User savedUser = userRepository.save(user);
