@@ -1,6 +1,7 @@
 package com.springboot.usermanagement.service.impl;
 
 import com.springboot.usermanagement.dto.UserDto;
+import com.springboot.usermanagement.mapper.UserMapper;
 import com.springboot.usermanagement.model.User;
 import com.springboot.usermanagement.repository.UserRepository;
 import com.springboot.usermanagement.service.UserService;
@@ -20,11 +21,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto userDto) {
         // convert UserDto into User JPA Entity
-        User user = new User(userDto.getId(), userDto.getFirstName(), userDto.getLastName(), userDto.getEmail());
+        User user = UserMapper.mapToUser(userDto);
         User savedUser = userRepository.save(user);
 
         //convert User JPA entity to UserDto
-        UserDto savedUserDto = new UserDto(savedUser.getId(), savedUser.getFirstName(), savedUser.getLastName(),savedUser.getEmail());
+        UserDto savedUserDto = UserMapper.mapToUserDto(savedUser);
         return savedUserDto;
     }
 
