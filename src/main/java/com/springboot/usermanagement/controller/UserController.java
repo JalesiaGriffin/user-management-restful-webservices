@@ -1,5 +1,6 @@
 package com.springboot.usermanagement.controller;
 
+import com.springboot.usermanagement.dto.UserDto;
 import com.springboot.usermanagement.model.User;
 import com.springboot.usermanagement.service.UserService;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,8 @@ public class UserController {
     // createUser REST API
     // http://localhost:8080/api/users
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        User savedUser = userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto user){
+        UserDto savedUser = userService.createUser(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 

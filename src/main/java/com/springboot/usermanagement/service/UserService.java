@@ -1,11 +1,12 @@
 package com.springboot.usermanagement.service;
 
+import com.springboot.usermanagement.dto.UserDto;
 import com.springboot.usermanagement.model.User;
 
 import java.util.List;
 
 public interface UserService {
-    User createUser(User user);
+    UserDto createUser(UserDto user);
 
     User getUserById(long userId);
 
